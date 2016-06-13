@@ -8,9 +8,12 @@ namespace StringCalculator
         {
         }
 
-        public int Adicionar(string v)
+        public int Adicionar(string valor)
         {
-            return 0;
+            if (string.IsNullOrWhiteSpace(valor))
+                return 0;
+
+            return int.Parse(valor);
         }
     }
 }

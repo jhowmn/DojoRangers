@@ -13,5 +13,13 @@ namespace StringCalculator
 
             Assert.AreEqual(0, calculadora.Adicionar(""));
         }
+
+        [TestMethod]
+        public void SeAdicionarUmNumero_RetornaOMesmoNumero()
+        {
+            var calculadora = new Calculadora();
+
+            Assert.AreEqual(1, calculadora.Adicionar("1"));
+        }
     }
 }
