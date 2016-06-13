@@ -7,9 +7,11 @@ namespace StringCalculator
     public class CalculadoraTest
     {
         [TestMethod]
-        public void ConsegueCriarClasseCalculadora()
+        public void SeAdicionarValorVazio_RetornaZero()
         {
             var calculadora = new Calculadora();
+
+            Assert.AreEqual(0, calculadora.Adicionar(""));
         }
     }
 }
