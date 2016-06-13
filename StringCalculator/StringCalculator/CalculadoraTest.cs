@@ -32,5 +32,11 @@ namespace StringCalculator
             Assert.AreEqual(5, calculadora.Adicionar("2,3"));
             Assert.AreEqual(19, calculadora.Adicionar("5,3,7,4"));
         }
+
+        [TestMethod]
+        public void SeSeparadorForNovaLinha_RetornaASoma()
+        {
+            Assert.AreEqual(19, calculadora.Adicionar("5\n3,7,4"));
+        }
     }
 }

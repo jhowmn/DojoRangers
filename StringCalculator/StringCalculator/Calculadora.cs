@@ -13,7 +13,7 @@ namespace StringCalculator
             if (string.IsNullOrWhiteSpace(valor))
                 return 0;
 
-            var valores = valor.Split(',');
+            var valores = valor.Split(',', '\n');
 
             int total = 0;
             foreach(var numero in valores)
