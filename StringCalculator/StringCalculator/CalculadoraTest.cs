@@ -30,6 +30,7 @@ namespace StringCalculator
         public void SeAdicionarDoisOuMaisNumeros_RetornaASoma()
         {
             Assert.AreEqual(5, calculadora.Adicionar("2,3"));
+            Assert.AreEqual(19, calculadora.Adicionar("5,3,7,4"));
         }
     }
 }
