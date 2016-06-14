@@ -45,5 +45,19 @@ namespace StringCalculator
             Assert.AreEqual(6, calculadora.Somar("//;\n1;2;3"));
             Assert.AreEqual(6, calculadora.Somar("//victor\n1victor2victor3"));
         }
+
+        [TestMethod]
+        public void SeHouverNumerosNegativos_RetornaExcecao()
+        {
+            try
+            {
+                calculadora.Somar("-5,-9");
+                Assert.Fail();
+            }
+            catch(NumbersNotAllowedException ex)
+            {
+                Assert.AreEqual("-5,-9", ex.Message);
+            }
+        }
     }
 }

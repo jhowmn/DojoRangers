@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace StringCalculator
 {
@@ -32,11 +33,13 @@ namespace StringCalculator
 
         private int SomarNumeros(string numeros)
         {
-            var numeroses = numeros.Split(ObterDelimitadores(), StringSplitOptions.RemoveEmptyEntries);
-            int total = 0;
-            foreach (var numero in numeroses)
-                total += int.Parse(numero);
-            return total;
+            var numerosSeparados = numeros.Split(ObterDelimitadores(), StringSplitOptions.RemoveEmptyEntries);
+            var numerosInteiros = numerosSeparados.Select(s => int.Parse(s));
+
+            if (numerosInteiros.Any(a => a < 0))
+                throw new NumbersNotAllowedException(string.Join(",", numerosInteiros.Where(w => w < 0)));
+
+            return numerosInteiros.Sum();
         }
 
         private string[] ObterDelimitadores()

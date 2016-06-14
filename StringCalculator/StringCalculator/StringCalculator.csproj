@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Calculadora.cs" />
     <Compile Include="CalculadoraTest.cs" />
+    <Compile Include="NumbersNotAllowedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Choose>
