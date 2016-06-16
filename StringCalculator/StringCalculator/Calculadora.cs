@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace StringCalculator
 {
@@ -25,10 +26,9 @@ namespace StringCalculator
 
         private string ObterNumerosComDelimitadorCustomizado(string numeros)
         {
+            delimitadorCustomizado = Regex.Match(numeros, @"\[([^)]*)\]").Groups[1].Value;
             var posicaoPrimeiraNovaLinha = numeros.IndexOf('\n');
-            delimitadorCustomizado = numeros.Substring(2, posicaoPrimeiraNovaLinha - 2);
-            numeros = numeros.Substring(posicaoPrimeiraNovaLinha + 1);
-            return numeros;
+            return numeros.Substring(posicaoPrimeiraNovaLinha + 1);
         }
 
         private int SomarNumeros(string numeros)
