@@ -36,8 +36,10 @@ namespace StringCalculator
             var numerosSeparados = numeros.Split(ObterDelimitadores(), StringSplitOptions.RemoveEmptyEntries);
             var numerosInteiros = numerosSeparados.Select(s => int.Parse(s));
 
-            if (numerosInteiros.Any(a => a < 0))
+            if (numerosInteiros.Any(n => n < 0))
                 throw new NumbersNotAllowedException(string.Join(",", numerosInteiros.Where(w => w < 0)));
+
+            numerosInteiros = numerosInteiros.Where(n => n <= 1000);
 
             return numerosInteiros.Sum();
         }
@@ -46,6 +48,5 @@ namespace StringCalculator
         {
             return new string[] { ",", "\n", delimitadorCustomizado };
         }
-
     }
 }

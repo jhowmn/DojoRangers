@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace StringCalculator
 {
@@ -54,10 +53,17 @@ namespace StringCalculator
                 calculadora.Somar("-5,-9");
                 Assert.Fail();
             }
-            catch(NumbersNotAllowedException ex)
+            catch (NumbersNotAllowedException ex)
             {
                 Assert.AreEqual("-5,-9", ex.Message);
             }
+        }
+
+        [TestMethod]
+        public void SeHouverNumeroMaiorQueMil_DeveSerIgnoradoNaSoma()
+        {
+            Assert.AreEqual(1006, calculadora.Somar("//;\n1;2;3;1000"));
+            Assert.AreEqual(6, calculadora.Somar("//;\n1;2;3;1002"));
         }
     }
 }
