@@ -72,5 +72,12 @@ namespace StringCalculator
             Assert.AreEqual(6, calculadora.Somar("//[%]\n1%2%3"));
             Assert.AreEqual(6, calculadora.Somar("//[***]\n1***2***3"));
         }
+
+        [TestMethod]
+        public void PermitirMultiplosDelimitadoresDeQuaisquerTamanho()
+        {
+            Assert.AreEqual(6, calculadora.Somar("//[%][$]\n1%2$3"));
+            Assert.AreEqual(15, calculadora.Somar("//[bird][is][the][word]\n1bird2is3the4word5"));
+        }
     }
 }
