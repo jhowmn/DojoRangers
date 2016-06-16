@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace StringCalculator
 {
@@ -42,8 +41,8 @@ namespace StringCalculator
         [TestMethod]
         public void SeHouverSeparadorCustomizado_RetornaASoma()
         {
-            Assert.AreEqual(6, calculadora.Somar("//;\n1;2;3"));
-            Assert.AreEqual(6, calculadora.Somar("//victor\n1victor2victor3"));
+            Assert.AreEqual(6, calculadora.Somar("//[;]\n1;2;3"));
+            Assert.AreEqual(6, calculadora.Somar("//[victor]\n1victor2victor3"));
         }
 
         [TestMethod]
@@ -54,10 +53,31 @@ namespace StringCalculator
                 calculadora.Somar("-5,-9");
                 Assert.Fail();
             }
-            catch(NumbersNotAllowedException ex)
+            catch (NumbersNotAllowedException ex)
             {
                 Assert.AreEqual("-5,-9", ex.Message);
             }
+        }
+
+        [TestMethod]
+        public void SeHouverNumeroMaiorQueMil_DeveSerIgnoradoNaSoma()
+        {
+            Assert.AreEqual(1006, calculadora.Somar("//[;]\n1;2;3;1000"));
+            Assert.AreEqual(6, calculadora.Somar("//[;]\n1;2;3;1002"));
+        }
+
+        [TestMethod]
+        public void DelimitadoresPodemTerQualquerTamanhoDesdeQueEstejamEntreColchetes()
+        {
+            Assert.AreEqual(6, calculadora.Somar("//[%]\n1%2%3"));
+            Assert.AreEqual(6, calculadora.Somar("//[***]\n1***2***3"));
+        }
+
+        [TestMethod]
+        public void PermitirMultiplosDelimitadoresDeQuaisquerTamanho()
+        {
+            Assert.AreEqual(6, calculadora.Somar("//[%][$]\n1%2$3"));
+            Assert.AreEqual(15, calculadora.Somar("//[bird][is][the][word]\n1bird2is3the4word5"));
         }
     }
 }

@@ -1,11 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace StringCalculator
 {
     public class Calculadora
     {
-        private string delimitadorCustomizado = "";
+        private List<string> delimitadoresCustomizados = new List<string>();
+
+        public Calculadora()
+        {
+            delimitadoresCustomizados.Add(",");
+            delimitadoresCustomizados.Add("\n");
+        }
 
         public int Somar(string numeros)
         {
@@ -26,26 +33,22 @@ namespace StringCalculator
         private string ObterNumerosComDelimitadorCustomizado(string numeros)
         {
             var posicaoPrimeiraNovaLinha = numeros.IndexOf('\n');
-            delimitadorCustomizado = numeros.Substring(2, posicaoPrimeiraNovaLinha - 2);
-            numeros = numeros.Substring(posicaoPrimeiraNovaLinha + 1);
-            return numeros;
+            var delimitadores = numeros.Substring(2, posicaoPrimeiraNovaLinha - 2);
+            delimitadoresCustomizados.AddRange(delimitadores.Split(new char[] { '[', ']' }, StringSplitOptions.RemoveEmptyEntries));
+            return numeros.Substring(posicaoPrimeiraNovaLinha + 1);
         }
 
         private int SomarNumeros(string numeros)
         {
-            var numerosSeparados = numeros.Split(ObterDelimitadores(), StringSplitOptions.RemoveEmptyEntries);
+            var numerosSeparados = numeros.Split(delimitadoresCustomizados.ToArray(), StringSplitOptions.RemoveEmptyEntries);
             var numerosInteiros = numerosSeparados.Select(s => int.Parse(s));
 
-            if (numerosInteiros.Any(a => a < 0))
+            if (numerosInteiros.Any(n => n < 0))
                 throw new NumbersNotAllowedException(string.Join(",", numerosInteiros.Where(w => w < 0)));
+
+            numerosInteiros = numerosInteiros.Where(n => n <= 1000);
 
             return numerosInteiros.Sum();
         }
-
-        private string[] ObterDelimitadores()
-        {
-            return new string[] { ",", "\n", delimitadorCustomizado };
-        }
-
     }
 }
