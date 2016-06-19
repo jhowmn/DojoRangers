@@ -20,7 +20,12 @@ namespace StringCalculator
                 return 0;
 
             if (PossuiDelimitadorCustomizado(numeros))
+            {
+                delimitadoresCustomizados.Clear();
+                delimitadoresCustomizados.Add(",");
+                delimitadoresCustomizados.Add("\n");
                 numeros = ObterNumerosComDelimitadorCustomizado(numeros);
+            }
 
             return SomarNumeros(numeros);
         }
