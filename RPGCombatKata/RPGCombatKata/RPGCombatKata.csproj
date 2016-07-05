@@ -51,6 +51,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Character.cs" />
+    <Compile Include="CharacterMelee.cs" />
+    <Compile Include="CharacterRanged.cs" />
     <Compile Include="CharacterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

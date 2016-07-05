@@ -2,10 +2,11 @@
 
 namespace RPGCombatKata
 {
-    public class Character
+    public abstract class Character
     {
         public int Level { get; set; }
         public int Health { get; private set; }
+        public int AttackRange { get; set; }
         public bool IsAlive
         {
             get
@@ -14,17 +15,18 @@ namespace RPGCombatKata
             }
         }
 
-        public Character()
+        public Character(int attackRange)
         {
             Level = 1;
             Health = 1000;
+            AttackRange = attackRange;
         }
 
-        public void Attack(Character foe, int damage)
+        public void Attack(Character foe, int damage, int distance)
         {
-            if(this != foe)
+            if(this != foe && foe.AttackRange >= distance)
             {
-                if(foe.Level - this.Level >= 5)
+                if (foe.Level - this.Level >= 5)
                     foe.Health -= Convert.ToInt32(damage * 0.5);
                 else if (this.Level - foe.Level >= 5)
                     foe.Health -= Convert.ToInt32(damage * 1.5);
